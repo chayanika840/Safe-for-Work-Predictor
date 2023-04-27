@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NSFW Content Detection</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: transparent;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .body.safe {
+            background-image: url("https://cdn.vectorstock.com/i/1000x1000/38/12/safe-web-search-service-glowing-neon-sign-vector-23303812.webp");
+            background-size: cover;
+        }
+        .body.unsafe {
+            background-image: url("https://w0.peakpx.com/wallpaper/486/88/HD-wallpaper-censored-funny-text.jpg");
+            background-size: cover;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .result {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .result.safe {
+            color: #28a745;
+        }
+        .result.unsafe {
+            color: #FF0000
+        }
+        .result img {
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .result img:hover {
+            transform: scale(1.1);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+        .accuracy {
+            font-size: 18px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body class="body {% if prediction == 'Safe for work' %}safe{% elif prediction == 'Not safe for work' %}unsafe{% endif %}">
+    <div class = "container">
+        <h1>Result</h1>
+        <p class="result {% if prediction == 'Safe for work' %}safe{% elif prediction == 'Not safe for work' %}unsafe{% endif %}">The input image is classified as <strong>{{ prediction }}</strong></p>
+        <p class="accuracy">Accuracy: <strong>{{ accuracy }}%</strong></p>
+        {% if filename %}
+        <div class="result">
+            <img src="{{ url_for('static', filename=filename) }}" alt="Safe Image">
+        </div>
+        {% else %}
+        <div class="result unsafe">
+            <p>So we cannot display it here.</p>
+            <img src="{{ url_for('static', filename='unsafe_image.jpg') }}" alt="Unsafe Image">
+        </div>
+        {% endif %}
+        <a class="btn" href="/">Upload Another Image</a>
+    </div>
+</body>
+</html>

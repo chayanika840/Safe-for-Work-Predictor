@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NSFW Image Classification App</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+	body {
+			font-family: Arial, Helvetica, sans-serif;
+			margin: 0;
+			padding: 0;
+			background: url("https://cdn.secnews.gr/cb:90j0~424ea/w:auto/h:auto/q:mauto/id:a22bf67330bda877c689830a28becde9/https://www.secnews.gr/DSC01327.jpg") no-repeat center fixed;
+			background-size: cover;
+	}
+	h1 {
+		text-align: center;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		font-size: 36px;
+		font-weight: bold;
+		color: #333;
+		text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 30px;d
+	}
+
+	input[type=file] {
+    padding: 10px;
+    margin: 10px;
+    background-color: transparent;
+    border: 2px solid #FF8C00;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+	}
+
+	input[type=submit] {
+		padding: 10px 20px;
+		margin: 10px;
+		background-color: #4CAF50;
+		color: #FFF;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+		transition: background-color 0.3s ease;
+	}
+
+	input[type=submit]:hover {
+		background-color: #3E8E41;
+	}
+
+	img {
+		max-width: 500px;
+		height: auto;
+		margin-top: 30px;
+		box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+		border-radius: 5px;
+	}
+
+	.result {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 50px;
+		padding: 20px;
+		background-color: #FFF;
+		border-radius: 5px;
+		box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+	}
+
+	.result h2 {
+		margin-top: 0;
+		margin-bottom: 20px;
+		font-size: 28px;
+		font-weight: bold;
+		color: #333;
+		text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+	}
+
+	.result p {
+		font-size: 20px;
+		font-weight: bold;
+		margin: 10px 0;
+		color: #333;
+		text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+	}
+</style>
+
+</head>
+<body>
+	<h1>NSFW Image Classification App</h1>
+
+	<form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+		<input type="file" name="image">
+		<input type="submit" value="Predict">
+	</form>
+
+</body>
+</html>
